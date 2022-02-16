@@ -1,10 +1,19 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import Router from 'next/router'
+import React, { useEffect, useState } from 'react'
 import cities from '../services/city.list.json'
 
 const SearchBox = ({ placeholder }) => {
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState([])
+
+  useEffect(() => {
+    const clearSearch = () => setSearch('')
+    Router.events.on('routeChangeComplete', clearSearch)
+    return () => {
+      Router.events.off('routeChangeComplete', clearSearch)
+    }
+  }, [])
 
   // function to handle on change
   const handleOnChange = (e) => {
