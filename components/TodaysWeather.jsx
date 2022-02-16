@@ -3,9 +3,8 @@ import Image from 'next/image'
 import React from 'react'
 
 const TodaysWeather = ({ city, weather, timezone }) => {
-  console.log(city, weather, timezone)
   return (
-    <div className="container mx-auto mt-4 rounded-lg bg-blue-700 p-4  py-6 text-white lg:w-3/4">
+    <div className="container mx-auto mt-4 rounded-lg bg-blue-700 p-6   text-white lg:w-3/4">
       <div className="flex justify-between align-middle lg:px-4">
         <div className="block">
           <h3 className="pb-2 text-3xl font-semibold">

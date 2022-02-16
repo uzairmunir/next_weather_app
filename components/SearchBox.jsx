@@ -3,7 +3,7 @@ import Router from 'next/router'
 import React, { useEffect, useState } from 'react'
 import cities from '../services/city.list.json'
 
-const SearchBox = ({ placeholder }) => {
+const SearchBox = ({ placeholder, city }) => {
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
@@ -47,7 +47,9 @@ const SearchBox = ({ placeholder }) => {
         placeholder={placeholder}
         onChange={handleOnChange}
         type="text "
-        className="h-20 w-full rounded-lg border-2 border-blue-500 bg-gray-100 bg-gray-100 p-4 text-lg text-gray-700 outline-none focus:border-0 focus:ring-2 focus:ring-gray-200"
+        className={`${
+          city ? 'h-15' : 'h-20'
+        } w-full rounded-lg border-2 border-blue-500 bg-gray-100 bg-gray-100 p-4 text-lg text-gray-700 outline-none focus:border-0 focus:ring-2 focus:ring-gray-200`}
       />
       {search.length > 3 && (
         <ul className="mt-4 w-full rounded-lg border-2 border-blue-500 py-6 px-4 ">

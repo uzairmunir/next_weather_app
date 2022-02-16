@@ -2,16 +2,26 @@ import React from 'react'
 import cities from '../../services/city.list.json'
 import SearchBox from '../../components/SearchBox'
 import TodaysWeather from '../../components/TodaysWeather'
+import WeeklyWeather from '../../components/WeeklyWeather'
+import Link from 'next/link'
 
 const CityDetails = ({ city, weeklyWeather, timezone, currentWeather }) => {
   return (
     <div className="container mx-auto px-10 py-6">
-      <SearchBox placeholder="Search for another city" />
+      <div className="container mx-auto mb-4 lg:w-3/4">
+        <Link href="/">
+          <a className="text-2xl text-gray-500 hover:text-blue-500">
+            &larr; Home
+          </a>
+        </Link>
+      </div>
+      <SearchBox city={city} placeholder="Search for another city" />
       <TodaysWeather
         city={city}
         weather={weeklyWeather[0]}
         timezone={timezone}
       />
+      <WeeklyWeather weather={weeklyWeather} timezone={timezone} />
     </div>
   )
 }
