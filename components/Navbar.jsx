@@ -11,7 +11,7 @@ const Navbar = () => {
       </h3>
 
       <Link href="/">
-        <span className=" inline-block cursor-pointer rounded-lg bg-blue-500 px-4 py-2  text-center align-middle align-middle text-lg text-white">
+        <span className=" inline-block cursor-pointer rounded-lg bg-blue-500 px-4 py-2 text-center  align-middle align-middle text-lg text-white hover:bg-blue-900">
           Github Repository
         </span>
       </Link>

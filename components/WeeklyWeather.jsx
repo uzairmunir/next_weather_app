@@ -3,7 +3,6 @@ import Image from 'next/image'
 import React from 'react'
 
 const WeeklyWeather = ({ weather, timezone }) => {
-  console.log(weather)
   return (
     <div className="container mx-auto  mt-8  text-white lg:w-3/4">
       <h1 className="py-4 text-3xl font-semibold text-black">
@@ -15,7 +14,10 @@ const WeeklyWeather = ({ weather, timezone }) => {
             return
           }
           return (
-            <div className="my-2 block w-full rounded-lg bg-blue-400 px-2 lg:px-8">
+            <div
+              key={index}
+              className="my-2 block w-full rounded-lg bg-blue-400 px-2 lg:px-8"
+            >
               <div className="flex justify-between">
                 <div className="flex">
                   <div className="flex-col">

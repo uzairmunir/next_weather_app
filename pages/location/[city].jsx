@@ -4,8 +4,11 @@ import SearchBox from '../../components/SearchBox'
 import TodaysWeather from '../../components/TodaysWeather'
 import WeeklyWeather from '../../components/WeeklyWeather'
 import Link from 'next/link'
+import moment from 'moment-timezone'
+import HourlyWeather from '../../components/HourlyWeather'
 
-const CityDetails = ({ city, weeklyWeather, timezone, currentWeather }) => {
+const CityDetails = ({ city, weeklyWeather, timezone, hourlyWeather }) => {
+  console.log(hourlyWeather)
   return (
     <div className="container mx-auto px-10 py-6">
       <div className="container mx-auto mb-4 lg:w-3/4">
@@ -21,6 +24,7 @@ const CityDetails = ({ city, weeklyWeather, timezone, currentWeather }) => {
         weather={weeklyWeather[0]}
         timezone={timezone}
       />
+      <HourlyWeather weather={hourlyWeather} timezone={timezone} />
       <WeeklyWeather weather={weeklyWeather} timezone={timezone} />
     </div>
   )
@@ -46,6 +50,7 @@ export async function getServerSideProps(context) {
     }
   }
   const weeklyWeather = data?.daily
+  const hourlyWeather = getHourlyWeather(data?.hourly, data?.timezone)
 
   return {
     props: {
@@ -53,6 +58,7 @@ export async function getServerSideProps(context) {
       timezone: data?.timezone,
       currentWeather: data?.current,
       weeklyWeather: weeklyWeather,
+      hourlyWeather: hourlyWeather,
     },
   }
 }
@@ -73,4 +79,13 @@ export const getCityId = (params) => {
   } else {
     return null
   }
+}
+//
+const getHourlyWeather = (hourlyData, timezone) => {
+  const endOfDay = moment().tz(timezone).endOf('day').valueOf()
+  const eodTimeStamp = Math.floor(endOfDay / 1000)
+
+  const todaysData = hourlyData.filter((data) => data.dt < eodTimeStamp)
+
+  return todaysData
 }
