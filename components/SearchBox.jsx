@@ -2,10 +2,11 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import cities from '../services/city.list.json'
 
-const SearchBox = () => {
+const SearchBox = ({ placeholder }) => {
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
+  // function to handle on change
   const handleOnChange = (e) => {
     const { value } = e.target
     setSearch(value)
@@ -29,11 +30,12 @@ const SearchBox = () => {
     }
     return setSearchResults(matchingCities)
   }
-  console.log(searchResults)
+
   return (
     <div className="container mx-auto lg:mt-4 lg:w-3/4">
       <input
         value={search}
+        placeholder={placeholder}
         onChange={handleOnChange}
         type="text "
         className="h-20 w-full rounded-lg border-2 border-blue-500 bg-gray-100 bg-gray-100 p-4 text-lg text-gray-700 outline-none focus:border-0 focus:ring-2 focus:ring-gray-200"
